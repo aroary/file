@@ -1,0 +1,25 @@
+{
+  "name": "file",
+  "version": "1.0.0",
+  "description": "Store a file online",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aroary/file.git"
+  },
+  "keywords": [
+    "file"
+  ],
+  "author": "aroary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aroary/file/issues"
+  },
+  "homepage": "https://github.com/aroary/file#readme",
+  "dependencies": {
+    "web10": "file:web10-1.0.0.tgz"
+  }
+}

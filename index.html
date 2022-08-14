@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <link rel="shortcut icon" href="#">
+        <meta name="viewport" content="width=device-width"/>
+        <script src="axios/dist/axios.min.js"></script>
+        <script src="sdk/wapi.js"></script>
+        <script src="./script.js" defer></script>
+    </head>
+    <body>
+        <button id="authButton">log in</button>
+        <p id="message">app not started</p>
+        <div>
+            <textarea id="curr" placeholder="write a note here"></textarea>
+            <button onclick="createNote(curr.value)">create note</button>
+        </div>
+        <div id="noteview"></div>
+    </body>
+</html>
