@@ -1,5 +1,5 @@
 //conventient failure messages
-const Fs = ([cF, rF, uF, dF] = ["create", "read", "update", "delete"].map((op) => `failed to ${op} note[s]`));
+const [cF, rF, uF, dF] = ["create", "read", "update", "delete"].map((op) => `failed to ${op} file`);
 
 /* wapi setup */
 const wapi = wapiInit("https://auth.web10.app");
@@ -22,32 +22,20 @@ else wapi.authListen(initApp);
 
 /* CRUD Calls */
 function readNotes() {
-    wapi
-        .read("aroary/file", {})
-        .then((response) => displayNotes(response.data))
-        .catch((error) => (message.innerHTML = `${rF} : ${error.response.data.detail}`));
+    wapi.read("aroary/file", {}).then((response) => displayNotes(response.data)).catch((error) => (message.innerHTML = `${rF} : ${error.response.data.detail}`));
 }
 function createNote(note) {
-    wapi
-        .create("aroary/file", { note: note, date: String(new Date()) })
-        .then(() => {
+    wapi.create("aroary/file", { note: note, date: String(new Date()) }).then(() => {
             readNotes();
             curr.value = "";
-        })
-        .catch((error) => (message.innerHTML = `${cF} : ${error.response.data.detail}`));
+    }).catch((error) => (message.innerHTML = `${cF} : ${error.response.data.detail}`));
 }
 function updateNote(id) {
     const entry = String(document.getElementById(id).value);
-    wapi
-        .update("aroary/file", { _id: id }, { $set: { note: entry } })
-        .then(readNotes)
-        .catch((error) => (message.innerHTML = `${uF} : ${error.response.data.detail}`));
+    wapi.update("aroary/file", { _id: id }, { $set: { note: entry } }).then(readNotes).catch((error) => (message.innerHTML = `${uF} : ${error.response.data.detail}`));
 }
 function deleteNote(id) {
-    wapi
-        .delete("aroary/file", { _id: id })
-        .then(readNotes)
-        .catch((error) => (message.innerHTML = `${dF} : ${error.response.data.detail}`));
+    wapi.delete("aroary/file", { _id: id }).then(readNotes).catch((error) => (message.innerHTML = `${dF} : ${error.response.data.detail}`));
 }
 
 /* display */
