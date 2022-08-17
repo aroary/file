@@ -1,6 +1,6 @@
 /* wapi setup */
 const wapi = wapiInit("https://auth.web10.app");
-wapi.SMROnReady([{ service: "aroary-file", cross_origins: ["aroary.com", "localhost", "127.0.0.1"] }], []);
+wapi.SMROnReady([{ service: "aroary-file", cross_origins: ["aroary.com", "aroary.github.io", "localhost", "127.0.0.1"] }], []);
 auth.onclick = wapi.openAuthPortal;
 
 function intitiate() {
