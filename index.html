@@ -1,18 +1,30 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <title>File</title>
         <link rel="shortcut icon" href="#">
         <meta name="viewport" content="width=device-width"/>
-        <script src="axios/dist/axios.min.js"></script>
-        <script src="sdk/wapi.js"></script>
+        <link rel="stylesheet" href="./style.css">
+        <script src="node_modules/axios/dist/axios.min.js"></script>
+        <script src="node_modules/web10/wapi.js"></script>
         <script src="./script.js" defer></script>
     </head>
     <body>
-        <button id="authButton">log in</button>
-        <p id="message">app not started</p>
-        <div>
-            <textarea id="curr" placeholder="write a note here"></textarea>
-            <button onclick="createNote(curr.value)">create note</button>
-        </div>
-        <div id="noteview"></div>
+        <header>
+            <button id="auth">log in</button>
+            <span id="message">app not started</span>
+        </header>
+        <main>
+            <input id="lineWrap" type="checkbox" name="lw" onclick="lw()">
+            <label for="lw">line wrap</label>
+            <br>
+            <textarea id="file" placeholder="..." spellcheck="false"></textarea>
+            <br>
+            <button onclick="updateFile(file.value)">save</button>
+        </main>
+        <footer>
+            <p>This app uses <a href="https://web10.app" target="_blank">Web10</a>.</p>
+            <h5>copyright &copy; 2022 aroary</h5>
+        </footer>
     </body>
 </html>

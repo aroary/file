@@ -1,0 +1,22 @@
+header {
+    padding: 50px;
+}
+
+main {
+    text-align: center;
+}
+
+textarea {
+    font-family: "Courier New", monospace;
+    width: 80%;
+    height: 600px;
+    resize: vertical;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow: scroll;
+}
+
+footer {
+    text-align: right;
+    padding: 50px;
+}

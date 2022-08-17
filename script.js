@@ -1,52 +1,54 @@
-//conventient failure messages
-const [cF, rF, uF, dF] = ["create", "read", "update", "delete"].map((op) => `failed to ${op} file`);
-
 /* wapi setup */
 const wapi = wapiInit("https://auth.web10.app");
-wapi.SMROnReady([{ service: "aroary/file", cross_origins: ["aroary.com", "localhost", "docs.localhost"] }], []);
-authButton.onclick = wapi.openAuthPortal;
+wapi.SMROnReady([{ service: "aroary-file", cross_origins: ["aroary.com", "localhost", "127.0.0.1"] }], []);
+auth.onclick = wapi.openAuthPortal;
 
-function initApp() {
-    authButton.innerHTML = "log out";
-    authButton.onclick = () => {
-        wapi.signOut();
-        window.location.reload();
-    };
-    const t = wapi.readToken();
-    message.innerHTML = `hello ${t["provider"]}/${t["username"]},<br>`;
-    readNotes();
+function intitiate() {
+    auth.innerHTML = "log out";
+    auth.onclick = () => window.location.reload(wapi.signOut());
+    const t = wapi.readToken() || {};
+    message.innerHTML = `hello ${t["provider"]}/${t["username"]}`;
+    readFile();
 }
 
-if (wapi.isSignedIn()) initApp();
-else wapi.authListen(initApp);
+if (wapi.isSignedIn()) intitiate();
+else wapi.authListen(intitiate);
+
+var id;
 
 /* CRUD Calls */
-function readNotes() {
-    wapi.read("aroary/file", {}).then((response) => displayNotes(response.data)).catch((error) => (message.innerHTML = `${rF} : ${error.response.data.detail}`));
-}
-function createNote(note) {
-    wapi.create("aroary/file", { note: note, date: String(new Date()) }).then(() => {
-            readNotes();
-            curr.value = "";
-    }).catch((error) => (message.innerHTML = `${cF} : ${error.response.data.detail}`));
-}
-function updateNote(id) {
-    const entry = String(document.getElementById(id).value);
-    wapi.update("aroary/file", { _id: id }, { $set: { note: entry } }).then(readNotes).catch((error) => (message.innerHTML = `${uF} : ${error.response.data.detail}`));
-}
-function deleteNote(id) {
-    wapi.delete("aroary/file", { _id: id }).then(readNotes).catch((error) => (message.innerHTML = `${dF} : ${error.response.data.detail}`));
+function readFile() {
+    wapi
+        .read("aroary-file", {})
+        .then(response => {
+            if (response.data.length) {
+                file.textContent = response.data[0].contents;
+                id = response.data[0]._id;
+            } else {
+                createFile("");
+                readFile();
+            }
+        })
+        .catch(console.error);
 }
 
-/* display */
-function displayNotes(data) {
-    function contain(note) {
-        return `<div>
-            <p style="font-family:monospace;">${note.date}</p>
-            <textarea id="${note._id}">${note.note}</textarea>
-            <button onclick="updateNote('${note._id}')">Update</button>
-            <button onclick="deleteNote('${note._id}')">Delete</button>
-        </div>`;
-    }
-    noteview.innerHTML = data.map(contain).reverse().join(`<br>`);
+function createFile(contents) {
+    wapi
+        .create("aroary-file", { contents })
+        .then(readFile)
+        .catch(console.error);
 }
+
+function updateFile(contents) {
+    wapi
+        .update("aroary-file", { _id: id }, { $set: { contents } })
+        .then(readFile)
+        .catch(console.error);
+}
+
+function lw() {
+    if (lineWrap.checked) file.style.whiteSpace = "pre-wrap";
+    else file.style.whiteSpace = "pre";
+}
+
+lw();
