@@ -7,7 +7,7 @@ function intitiate() {
     auth.innerHTML = "log out";
     auth.onclick = () => window.location.reload(wapi.signOut());
     const t = wapi.readToken() || {};
-    message.innerHTML = `hello ${t["provider"]}/${t["username"]}`;
+    message.innerHTML = "hello " + t["username"];
     readFile();
 }
 
