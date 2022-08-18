@@ -52,3 +52,10 @@ function lw() {
 }
 
 lw();
+
+document.onkeydown = e => {
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        updateFile(file.value);
+    }
+};
