@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/aroary/file#readme",
   "dependencies": {
-    "web10": "file:web10-1.0.0.tgz"
+    "web10-npm": "^1.0.0"
   }
 }
