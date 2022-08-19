@@ -30,8 +30,46 @@
             <label for="cs">check spelling</label>
             <input id="darkMode" type="checkbox" name="dm" onclick="dm()">
             <label for="dm">dark mode</label>
+            <input id="renderView" type="checkbox" name="rv" onclick="rv()">
+            <label for="rv">render view</label>
             <br>
-            <textarea id="file" placeholder="..." spellcheck="false"></textarea>
+            <table>
+                <tr>
+                    <td id="cFile"><textarea id="file" placeholder="..." spellcheck="false"></textarea></td>
+                    <td>
+                        <div id="view">
+                            <button onclick="render(mime.options[mime.selectedIndex].value)">render</button>
+                            <label for="render">:</label>
+                            <select id="mime" name="render">
+                                <option disabled>text</option>
+                                <option value="text/plain" selected>txt</option>
+                                <option value="text/html">html</option>
+                                <option disabled>image</option>
+                                <option value="image/png">png</option>
+                                <option value="image/jpg">jpg</option>
+                                <option value="image/webp">webp</option>
+                                <option value="image/avif">avif</option>
+                                <option value="image/gif">gif</option>
+                                <option value="image/vnd">ico</option>
+                                <option value="image/svg">svg</option>
+                                <option value="image/tiff">tif</option>
+                                <option disabled>audio</option>
+                                <option value="audio/wav">wav</option>
+                                <option value="audio/mpeg">mp3</option>
+                                <option value="audio/webm">webm</option>
+                                <option disabled>video</option>
+                                <option value="video/mp4">mp4</option>
+                                <option value="video/mpeg">mpeg</option>
+                                <option value="video/webm">webm</option>
+                                <option disabled>application</option>
+                                <option value="application/json">json</option>
+                                <option value="application/pdf">pdf</option>
+                            </select>
+                            <div id="rendered"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
             <br>
             <button onclick="updateFile(file.value)" title="Ctrl + S">upload</button>
             <button onclick="file.value = ''">clear</button>

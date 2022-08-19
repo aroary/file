@@ -54,14 +54,10 @@ function lw() {
     else file.style.whiteSpace = "pre";
 }
 
-lw();
-
 function cs() {
     if (checkSpelling.checked) file.spellcheck = true;
     else file.spellcheck = false;
 }
-
-cs();
 
 function dm() {
     const root = document.querySelector(':root');
@@ -75,7 +71,21 @@ function dm() {
     }
 }
 
+function rv() {
+    if (renderView.checked) {
+        view.style.display = "block";
+        cFile.style.width = "50%";
+    }
+    else {
+        view.style.display = "none";
+        cFile.style.width = "100%";
+    }
+}
+
+lw();
+cs();
 dm();
+rv()
 
 document.onkeydown = e => {
     if (e.ctrlKey && e.key === 's') {
@@ -93,3 +103,63 @@ function download(data, name) {
     a.click();
     document.body.removeChild(a);
 }
+
+function render(mime) {
+    switch (mime) {
+        case "text/plain":
+            rendered.innerHTML = `<div style="border:2px ridge grey;"><code white-space:pre;">${file.value}</code></div>`;
+            break;
+        case "text/html":
+            rendered.innerHTML = `<iframe style="background-color:white;" srcdoc="${file.value}"></iframe>`;
+            break;
+        case "image/png":
+        case "image/jpg":
+        case "image/gif":
+        case "image/jpeg":
+        case "image/webp":
+        case "image/bmp":
+        case "image/tiff":
+        case "image/vnd":
+        case "image/svg+xml":
+        case "application/pdf":
+            try {
+                atob(file.value);
+                rendered.innerHTML = `<img style="border:2px ridge grey;" src="data:${mime};base64,${file.value}">`;
+            } catch (_) {
+                rendered.innerHTML = `<img style="border:2px ridge grey;" src="data:${mime};base64,${btoa(file.value)}">`;
+            }
+            break;
+        case "audio/mpeg":
+        case "audio/ogg":
+        case "audio/wav":
+        case "audio/webm":
+            try {
+                atob(file.value);
+                rendered.innerHTML = `<audio style="border:2px ridge grey;" controls><source src="data:${mime};base64,${file.value}"></audio>`;
+            } catch (_) {
+                rendered.innerHTML = `<audio style="border:2px ridge grey;" controls><source src="data:${mime};base64,${btoa(file.value)}"></audio>`;
+            }
+            break;
+        case "video/mp4":
+        case "video/ogg":
+        case "video/webm":
+            try {
+                atob(file.value);
+                rendered.innerHTML = `<video style="border:2px ridge grey;" controls><source src="data:${mime};base64,${file.value}"></video>`;
+            } catch (_) {
+                rendered.innerHTML = `<video style="border:2px ridge grey;" controls><source src="data:${mime};base64,${btoa(file.value)}"></video>`;
+            }
+            break;
+        case "application/json":
+            try {
+                rendered.innerHTML = `<code style="border:2px ridge grey;" style="white-space:pre;">${JSON.stringify(JSON.parse(file.value), null, 2)}</code>`;
+            } catch (e) {
+                rendered.innerHTML = `<code style="border:2px ridge grey;color:red;">${e}</code>`;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+// data:image/jpeg;base64,

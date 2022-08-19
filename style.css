@@ -16,16 +16,42 @@ main {
     text-align: center;
 }
 
+table {
+    width: 100%;
+    padding: 0;
+}
+
+table td {
+    width: 50%;
+    padding: 0;
+    vertical-align: top;
+}
+
 textarea {
     background-color: var(--theme-bg);
     color: var(--theme-fg);
     font-family: "Courier New", monospace;
-    width: 80%;
-    height: 600px;
+    width: 90%;
+    height: 300px;
     resize: vertical;
     white-space: pre;
     overflow-wrap: normal;
     overflow: scroll;
+}
+
+#view {
+    text-align: left;
+}
+
+#rendered {
+    background-color: var(--theme-bg);
+    color: var(--theme-fg);
+    width: 90%;
+}
+
+#rendered > img {
+    max-width: 90%;
+    max-height: 90%;
 }
 
 footer {
