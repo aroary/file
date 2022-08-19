@@ -71,9 +71,11 @@
                 </tr>
             </table>
             <br>
-            <button onclick="updateFile(file.value)" title="Ctrl + S">upload</button>
-            <button onclick="file.value = ''">clear</button>
-            <button onclick="download(file.value, 'file.txt')">download</button>
+            <button onclick="updateFile(file.value)" title="Export to web10">export</button>
+            <button onclick="readFile()" title="Import from web10">import</button>
+            <button onclick="file.value = ''">clear text</button>
+            <button onclick="" title="Upload from drive" disabled>upload</button>
+            <button onclick="download(file.value, 'file.txt')" title="Download to drive">download</button>
         </main>
         <footer>
             <p>This app uses <a href="https://web10.app" target="_blank">Web10</a>.</p>
