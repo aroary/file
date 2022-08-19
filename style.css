@@ -1,3 +1,13 @@
+:root {
+    --theme-bg: white;
+    --theme-fg: black;
+}
+
+body {
+    background-color: var(--theme-bg);
+    color: var(--theme-fg);
+}
+
 header {
     padding: 50px;
 }
@@ -7,6 +17,8 @@ main {
 }
 
 textarea {
+    background-color: var(--theme-bg);
+    color: var(--theme-fg);
     font-family: "Courier New", monospace;
     width: 80%;
     height: 600px;

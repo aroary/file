@@ -53,6 +53,20 @@ function lw() {
 
 lw();
 
+function dm() {
+    const root = document.querySelector(':root');
+    if (darkMode.checked) {
+        root.style.setProperty('--theme-bg', 'black');
+        root.style.setProperty('--theme-fg', 'white');
+    }
+    else {
+        root.style.setProperty('--theme-bg', 'white');
+        root.style.setProperty('--theme-fg', 'black');
+    }
+}
+
+dm();
+
 document.onkeydown = e => {
     if (e.ctrlKey && e.key === 's') {
         e.preventDefault();
