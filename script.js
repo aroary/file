@@ -80,3 +80,13 @@ document.onkeydown = e => {
         updateFile(file.value);
     }
 };
+
+function download(data, name) {
+    const a = document.createElement("a");
+    a.download = name;
+    a.href = window.URL.createObjectURL(new Blob([data], { type: 'text/plain' }));
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}

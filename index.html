@@ -34,6 +34,8 @@
             <textarea id="file" placeholder="..." spellcheck="false"></textarea>
             <br>
             <button onclick="updateFile(file.value)" title="Ctrl + S">save</button>
+            <button onclick="file.value = ''">clear</button>
+            <button onclick="download(file.value, 'file.txt')">download</button>
         </main>
         <footer>
             <p>This app uses <a href="https://web10.app" target="_blank">Web10</a>.</p>
