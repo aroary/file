@@ -53,6 +53,13 @@ function lw() {
 
 lw();
 
+function cs() {
+    if (checkSpelling.checked) file.spellcheck = true;
+    else file.spellcheck = false;
+}
+
+cs();
+
 function dm() {
     const root = document.querySelector(':root');
     if (darkMode.checked) {
