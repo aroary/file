@@ -5,7 +5,10 @@ auth.onclick = wapi.openAuthPortal;
 
 function intitiate() {
     auth.innerHTML = "log out";
-    auth.onclick = () => window.location.reload(wapi.signOut());
+    auth.onclick = () => {
+        wapi.signOut();
+        window.location.reload();
+    }
     const t = wapi.readToken() || {};
     message.innerHTML = "hello " + t["username"];
     readFile();
