@@ -25,21 +25,24 @@
         </header>
         <main>
             <input id="lineWrap" type="checkbox" name="lw" onclick="lw()">
-            <label for="lw">line wrap</label>
+            <label for="lineWrap">line wrap</label>
             <input id="checkSpelling" type="checkbox" name="cs" onclick="cs()">
-            <label for="cs">check spelling</label>
+            <label for="checkSpelling">check spelling</label>
             <input id="darkMode" type="checkbox" name="dm" onclick="dm()">
-            <label for="dm">dark mode</label>
+            <label for="darkMode">dark mode</label>
             <input id="renderView" type="checkbox" name="rv" onclick="rv()">
-            <label for="rv">render view</label>
+            <label for="renderView">render view</label>
             <br>
             <table>
                 <tr>
                     <td id="cFile"><textarea id="file" placeholder="..." spellcheck="false"></textarea></td>
                     <td>
                         <div id="view">
+                            <button onclick="file.value = btoa(file.value)" disabled>btoa</button>
+                            <button onclick="file.value = atob(file.value)" disabled>atob</button>
                             <button onclick="render(mime.options[mime.selectedIndex].value)">render</button>
-                            <label for="render">:</label>
+                            <br>
+                            <label for="mime">mime:</label>
                             <select id="mime" name="render">
                                 <option disabled>text</option>
                                 <option value="text/plain" selected>txt</option>
@@ -71,11 +74,12 @@
                 </tr>
             </table>
             <br>
-            <button onclick="updateFile(file.value)" title="Export to web10">export</button>
-            <button onclick="readFile()" title="Import from web10">import</button>
+            <button onclick="updateFile(file.value)" title="Export to web10">web10 export</button>
+            <button onclick="readFile()" title="Import from web10">web10 import</button>
             <button onclick="file.value = ''">clear text</button>
-            <button onclick="" title="Upload from drive" disabled>upload</button>
-            <button onclick="download(file.value, 'file.txt')" title="Download to drive">download</button>
+            <input id="uploader" type="file" name="file" hidden>
+            <label for="uploader"><button onclick="uploader.click()" title="Upload from drive">local upload</button></label>
+            <button onclick="download(file.value, 'file.txt')" title="Download to drive">local download</button>
         </main>
         <footer>
             <p>This app uses <a href="https://web10.app" target="_blank">Web10</a>.</p>

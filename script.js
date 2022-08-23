@@ -104,6 +104,15 @@ function download(data, name) {
     document.body.removeChild(a);
 }
 
+function upload(event) {
+    const files = event.target.files;
+    const read = new FileReader();
+    read.onload = e => file.textContent = e.target.result.slice(e.target.result.indexOf(";base64,") + 8);
+    read.readAsDataURL(files[files.length - 1]);
+}
+
+uploader.addEventListener("change", upload, false);
+
 function render(mime) {
     switch (mime) {
         case "text/plain":
@@ -161,5 +170,3 @@ function render(mime) {
             break;
     }
 }
-
-// data:image/jpeg;base64,
